@@ -2,6 +2,13 @@
 
 namespace Trestle;
 
+function enableErrors() : void
+{
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(-1);
+}
+
 class RequestException extends \Exception
 {
     public $arg;
@@ -38,7 +45,7 @@ final class Request
             }
             else
             {
-                throw new RequestException("URI cannot be determined", "uri");
+                $uri = "/";
             }
         }
         return new Request($_SERVER['REQUEST_METHOD'], $uri, $_GET, $_POST);
@@ -192,7 +199,7 @@ final class Application
         {
             foreach ($this->middleware as $mw)
             {
-                if (!$mw->handle($request))
+                if (!$mw->handle($request, $response))
                 {
                     break;
                 }
