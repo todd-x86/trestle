@@ -7,7 +7,20 @@ class PrintMiddleware implements \Trestle\MiddlewareInterface
     public function handle(\Trestle\Request $request, \Trestle\Response $response) : bool
     {
         print_r($request);
-        throw new Exception("FOO");
+        return true;
+    }
+}
+
+class AuthMiddleware implements \Trestle\MiddlewareInterface
+{
+    public function handle(\Trestle\Request $request, \Trestle\Response $response) : bool
+    {
+        if ($request->getUri() == "/admin")
+        {
+            $response->status = 403;
+            $response->write("<h1>Forbidden</h1>");
+            return false;
+        }
         return true;
     }
 }
@@ -15,6 +28,6 @@ class PrintMiddleware implements \Trestle\MiddlewareInterface
 \Trestle\enableErrors();
 
 $app = new \Trestle\Application();
-$app->addMiddleware(new PrintMiddleware());
+$app->addMiddleware(new AuthMiddleware());
 $app->addMiddleware(new PrintMiddleware());
 $app->run(\Trestle\Request::create());
