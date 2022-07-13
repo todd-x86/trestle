@@ -1,0 +1,17 @@
+{
+    "name": "nuradius/trestle",
+    "description": "PHP middleware library",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Todd Suess",
+            "email": "todd@datacomponents.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Trestle\\": "src/"}
+    },
+    "minimum-stability": "alpha",
+    "require": {}
+}
