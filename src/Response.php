@@ -11,32 +11,32 @@ final class Response
     public $contentType = 'text/html';
     public $filename = null;
 
-    public function forbidden() : void
+    public function forbidden()
     {
         $this->status = 403;
     }
 
-    public function header(string $name, string $value) : void
+    public function header(string $name, string $value)
     {
         $this->headers[] = [$name, $value];
     }
 
-    public function write(string $content) : void
+    public function write(string $content)
     {
         $this->content .= $content;
     }
 
-    public function clearContent() : void
+    public function clearContent()
     {
         $this->content = "";
     }
 
-    public function clearHeaders() : void
+    public function clearHeaders()
     {
         $this->headers = [];
     }
 
-    public function clear() : void
+    public function clear()
     {
         $this->clearContent();
         $this->clearHeaders();

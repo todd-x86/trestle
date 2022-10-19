@@ -7,24 +7,24 @@ final class Application
     private $middleware = [];
     private $exceptionHandler = null;
 
-    public function enableErrors() : void
+    public function enableErrors()
     {
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(-1);
     }
 
-    public function addMiddleware(MiddlewareInterface $middleware) : void
+    public function addMiddleware(MiddlewareInterface $middleware)
     {
         $this->middleware[] = $middleware;
     }
 
-    public function setExceptionHandler(ExceptionHandlerInterface $handler) : void
+    public function setExceptionHandler(ExceptionHandlerInterface $handler)
     {
         $this->exceptionHandler = $handler;
     }
 
-    private function sendResponse(Response $response) : void
+    private function sendResponse(Response $response)
     {
         // Send headers
         header($_SERVER['SERVER_PROTOCOL'].' '.$response->status);
@@ -42,7 +42,7 @@ final class Application
         print $response->getContent();
     }
 
-    private function handleException(\Exception $ex) : void
+    private function handleException(\Exception $ex)
     {
         $response = new Response();
         if ($this->exceptionHandler !== null)
@@ -58,7 +58,7 @@ final class Application
         $this->sendResponse($response);
     }
 
-    public function run(RequestInterface $request) : void
+    public function run(RequestInterface $request)
     {
         $app = $this;
         register_shutdown_function(function() use ($app)
