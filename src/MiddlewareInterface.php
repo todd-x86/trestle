@@ -4,5 +4,5 @@ namespace Trestle;
 
 interface MiddlewareInterface
 {
-    public function handle(Request $request, Response $response) : bool;
+    public function handle(RequestInterface $request, Response $response) : bool;
 }

@@ -58,7 +58,7 @@ final class Application
         $this->sendResponse($response);
     }
 
-    public function run(Request $request) : void
+    public function run(RequestInterface $request) : void
     {
         $app = $this;
         register_shutdown_function(function() use ($app)

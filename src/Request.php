@@ -2,7 +2,7 @@
 
 namespace Trestle;
 
-final class Request
+final class Request implements RequestInterface
 {
     private $method;
     private $uri;
@@ -55,7 +55,7 @@ final class Request
         }
     }
 
-    public static function create(?string $uri = null) : Request
+    public static function create(string $uri = null) : Request
     {
         if ($uri === null)
         {
@@ -71,7 +71,7 @@ final class Request
         return new Request($_SERVER['REQUEST_METHOD'], $uri, $_GET, $_POST);
     }
 
-    public function getQueryParam(string $name) : ?string
+    public function getQueryParam(string $name) : string
     {
         if (isset($this->getData[$name]))
         {
@@ -83,7 +83,7 @@ final class Request
         }
     }
 
-    public function getPostField(string $name) : ?string
+    public function getPostField(string $name) : string
     {
         if (isset($this->postData[$name]))
         {
